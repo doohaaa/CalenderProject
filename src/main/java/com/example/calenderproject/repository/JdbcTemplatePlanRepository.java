@@ -2,11 +2,13 @@ package com.example.calenderproject.repository;
 
 import com.example.calenderproject.dto.PlanResponseDto;
 import com.example.calenderproject.entity.Plan;
+import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.sql.DataSource;
 import java.sql.ResultSet;
@@ -64,16 +66,39 @@ public class JdbcTemplatePlanRepository implements PlanRepository{
                         rs.getTimestamp("modifiedDate").toLocalDateTime()
                 );
             }
-        }
+        };
     }
 
     @Override
     public Optional<Plan> findPlanById(Long id) {
-        return Optional.empty();
+        List<Plan> result = jdbcTemplate.query("select * from plan where id =?", planRowMapperV2(), id);
+        return result.stream().findAny();
     }
+
+    private RowMapper<Plan> planRowMapperV2(){
+        return new RowMapper<Plan>() {
+
+            @Override
+            public Plan mapRow(ResultSet rs, int rowNum) throws SQLException {
+                return new Plan(
+                        rs.getString("writer"),
+                        rs.getString("contents"),
+                        rs.getString("password")
+
+                );
+            }
+        };
+    }
+
 
     @Override
     public Plan findPlanByIdOrElseThrow(Long id) {
-        return null;
+        List<Plan> result = jdbcTemplate.query("select * from plan where id =?", planRowMapperV2(), id);
+
+        return result.stream().findAny().orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Does not exsit id = "+id));
     }
+
+
+
+
 }
