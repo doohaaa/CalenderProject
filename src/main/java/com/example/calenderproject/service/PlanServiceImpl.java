@@ -23,16 +23,17 @@ public class PlanServiceImpl implements PlanService {
         // 요청 받은 데이터로 PLAN 객체 생성, ID 없음
         Plan plan = new Plan(dto.getWriter(), dto.getContents(), dto.getPassword());
 
-        return null;
+        return planRepository.savePlan(plan);
     }
 
     @Override
     public List<PlanResponseDto> findAllPlans() {
-        return List.of();
+        return planRepository.findAllPlans();
     }
 
     @Override
     public PlanResponseDto findPlanById(Long id) {
-        return null;
+        Plan plan = planRepository.findPlanByIdOrElseThrow(id);
+        return new PlanResponseDto(plan);
     }
 }
