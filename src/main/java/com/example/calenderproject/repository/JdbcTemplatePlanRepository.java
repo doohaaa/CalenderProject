@@ -62,7 +62,7 @@ public class JdbcTemplatePlanRepository implements PlanRepository{
                         rs.getLong("id"),
                         rs.getString("writer"),
                         rs.getString("contents"),
-                        null,
+                        "",
                         rs.getTimestamp("createdDate").toLocalDateTime(),
                         rs.getTimestamp("modifiedDate").toLocalDateTime()
                 );
@@ -82,17 +82,7 @@ public class JdbcTemplatePlanRepository implements PlanRepository{
             @Override
             public Plan mapRow(ResultSet rs, int rowNum) throws SQLException {
 
-                // 확인용
-                System.out.println("mapRow 내부에서의 rs : " + rs.getLong("id") + "  " + rs.getString("writer") + "  " +rs.getString("contents") + rs.getString("modifiedDate"));
-
-
-                Plan new_plan = new Plan(rs.getLong("id"), rs.getString("writer"), rs.getString("contents"), null, rs.getTimestamp("createdDate").toLocalDateTime(), rs.getTimestamp("modifiedDate").toLocalDateTime());
-
-                System.out.println("repository에서의 Plan (id, 일정, 생성시간)" + new_plan.getId() + new_plan.getContents() + new_plan.getCreatedDate().toString());
-
-                //
-
-                return new Plan( rs.getLong("id"), rs.getString("writer"), rs.getString("contents"),null,rs.getTimestamp("createdDate").toLocalDateTime(), rs.getTimestamp("modifiedDate").toLocalDateTime());
+                return new Plan( rs.getLong("id"), rs.getString("writer"), rs.getString("contents"),"",rs.getTimestamp("createdDate").toLocalDateTime(), rs.getTimestamp("modifiedDate").toLocalDateTime());
             }
         };
     }
