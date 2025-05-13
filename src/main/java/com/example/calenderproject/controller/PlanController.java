@@ -26,10 +26,21 @@ public class PlanController {
     }
 
     // 전체 조회
+    //@GetMapping
+    //public List<PlanResponseDto> findAllPlans() {
+    //    return planService.findAllPlans();
+    //}
+
+    // 필터 있는 전체 조회
     @GetMapping
-    public List<PlanResponseDto> findAllPlans() {
-        return planService.findAllPlans();
+    public List<PlanResponseDto> getPlans(
+            @RequestParam(required = false) String modifiedDate,
+            @RequestParam(required = false) String writer
+    ){
+        return planService.findPlans(modifiedDate, writer);
     }
+
+
 
     // 메모 단건 조회
     @GetMapping("/{id}")

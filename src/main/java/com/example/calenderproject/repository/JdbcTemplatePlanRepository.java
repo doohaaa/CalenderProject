@@ -14,10 +14,8 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.time.LocalDate;
+import java.util.*;
 
 @Repository
 public class JdbcTemplatePlanRepository implements PlanRepository{
@@ -53,6 +51,28 @@ public class JdbcTemplatePlanRepository implements PlanRepository{
     public List<PlanResponseDto> findAllPlans() {
         return jdbcTemplate.query("select * from plan", planRowMapper());
     }
+
+
+    @Override
+    public List<PlanResponseDto> findPlans(String modifiedDate, String writer) {
+        String sql = "select * from plan where 1=1";
+        List<Object> params = new ArrayList<>();
+
+        if(modifiedDate !=null && !modifiedDate.isEmpty()){
+            sql += " and DATE(modifiedDate) = ?";
+            params.add(LocalDate.parse(modifiedDate));
+        }
+        if(writer != null && !writer.isEmpty()){
+            sql += " and writer = ?";
+            params.add(writer);
+        }
+
+        sql += " order by modifiedDate desc";
+
+        return jdbcTemplate.query(sql, planRowMapper(), params.toArray());
+    }
+
+
 
     private RowMapper<PlanResponseDto> planRowMapper(){
         return new RowMapper<PlanResponseDto>() {

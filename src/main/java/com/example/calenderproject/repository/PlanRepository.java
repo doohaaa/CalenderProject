@@ -13,6 +13,8 @@ public interface PlanRepository {
 
     List<PlanResponseDto> findAllPlans();
 
+    List<PlanResponseDto> findPlans(String modifiedDate, String writer);
+
     Optional<Plan> findPlanById(Long id);
 
     // Plan findPlanByIdOrElseThrow(Long id);

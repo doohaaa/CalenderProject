@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -36,6 +37,15 @@ public class PlanServiceImpl implements PlanService {
         return plans;
 
     }
+
+    @Override
+    public List<PlanResponseDto> findPlans(String modifiedDate, String writer) {
+        List<PlanResponseDto> plans = planRepository.findPlans(modifiedDate, writer);
+
+        return plans;
+
+    }
+
 
     @Override
     public PlanResponseDto findPlanById(Long id) {

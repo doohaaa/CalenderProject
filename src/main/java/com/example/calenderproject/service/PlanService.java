@@ -11,5 +11,7 @@ public interface PlanService {
 
     List<PlanResponseDto> findAllPlans();
 
+    List<PlanResponseDto> findPlans(String modifiedDate, String writer);
+
     PlanResponseDto findPlanById(Long id);
 }
