@@ -15,6 +15,6 @@ public interface PlanRepository {
 
     Optional<Plan> findPlanById(Long id);
 
-    Plan findPlanByIdOrElseThrow(Long id);
+    // Plan findPlanByIdOrElseThrow(Long id);
 
 }

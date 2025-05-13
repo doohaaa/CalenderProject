@@ -72,36 +72,38 @@ public class JdbcTemplatePlanRepository implements PlanRepository{
 
     @Override
     public Optional<Plan> findPlanById(Long id) {
-        List<Plan> result = jdbcTemplate.query("select * from plan where id =?", planRowMapperV2(), id);
+        List<Plan> result = jdbcTemplate.query("select * from plan where id =?", planRowMapperV2(id), id);
         return result.stream().findAny();
     }
 
-    private RowMapper<Plan> planRowMapperV2(){
+    private RowMapper<Plan> planRowMapperV2(Long id){
         return new RowMapper<Plan>() {
 
             @Override
             public Plan mapRow(ResultSet rs, int rowNum) throws SQLException {
 
                 // 확인용
-                System.out.println(rs.getLong("id") + "  " + rs.getString("writer") + "  " +rs.getString("contents") + rs.getString("modifiedDate"));
+                System.out.println("mapRow 내부에서의 rs : " + rs.getLong("id") + "  " + rs.getString("writer") + "  " +rs.getString("contents") + rs.getString("modifiedDate"));
 
-                return new Plan(
-                        rs.getString("writer"),
-                        rs.getString("contents"),
-                        null
 
-                );
+                Plan new_plan = new Plan(rs.getLong("id"), rs.getString("writer"), rs.getString("contents"), null, rs.getTimestamp("createdDate").toLocalDateTime(), rs.getTimestamp("modifiedDate").toLocalDateTime());
+
+                System.out.println("repository에서의 Plan (id, 일정, 생성시간)" + new_plan.getId() + new_plan.getContents() + new_plan.getCreatedDate().toString());
+
+                //
+
+                return new Plan( rs.getLong("id"), rs.getString("writer"), rs.getString("contents"),null,rs.getTimestamp("createdDate").toLocalDateTime(), rs.getTimestamp("modifiedDate").toLocalDateTime());
             }
         };
     }
 
 
-    @Override
-    public Plan findPlanByIdOrElseThrow(Long id) {
-        List<Plan> result = jdbcTemplate.query("select * from plan where id =?", planRowMapperV2(), id);
-
-        return result.stream().findAny().orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Does not exsit id = "+id));
-    }
+//    @Override
+//    public Plan findPlanByIdOrElseThrow(Long id) {
+//        List<Plan> result = jdbcTemplate.query("select * from plan where id =?", planRowMapperV2(), id);
+//
+//        return result.stream().findAny().orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Does not exsit id = "+id));
+//    }
 
 
 
