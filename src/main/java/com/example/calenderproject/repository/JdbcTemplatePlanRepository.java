@@ -2,6 +2,7 @@ package com.example.calenderproject.repository;
 
 import com.example.calenderproject.dto.PlanResponseDto;
 import com.example.calenderproject.entity.Plan;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -61,7 +62,7 @@ public class JdbcTemplatePlanRepository implements PlanRepository{
                         rs.getLong("id"),
                         rs.getString("writer"),
                         rs.getString("contents"),
-                        rs.getString("password"),
+                        null,
                         rs.getTimestamp("createdDate").toLocalDateTime(),
                         rs.getTimestamp("modifiedDate").toLocalDateTime()
                 );
@@ -80,10 +81,14 @@ public class JdbcTemplatePlanRepository implements PlanRepository{
 
             @Override
             public Plan mapRow(ResultSet rs, int rowNum) throws SQLException {
+
+                // 확인용
+                System.out.println(rs.getLong("id") + "  " + rs.getString("writer") + "  " +rs.getString("contents") + rs.getString("modifiedDate"));
+
                 return new Plan(
                         rs.getString("writer"),
                         rs.getString("contents"),
-                        rs.getString("password")
+                        null
 
                 );
             }

@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @AllArgsConstructor
+@Setter
 public class PlanResponseDto {
 
 

@@ -4,9 +4,13 @@ import com.example.calenderproject.dto.PlanRequestDto;
 import com.example.calenderproject.dto.PlanResponseDto;
 import com.example.calenderproject.entity.Plan;
 import com.example.calenderproject.repository.PlanRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PlanServiceImpl implements PlanService {
@@ -28,12 +32,25 @@ public class PlanServiceImpl implements PlanService {
 
     @Override
     public List<PlanResponseDto> findAllPlans() {
-        return planRepository.findAllPlans();
+        List<PlanResponseDto> plans = planRepository.findAllPlans();
+        return plans;
+
     }
 
     @Override
     public PlanResponseDto findPlanById(Long id) {
-        Plan plan = planRepository.findPlanByIdOrElseThrow(id);
-        return new PlanResponseDto(plan);
+        Optional<Plan> optionalPlan = planRepository.findPlanById(id);
+        // NPE 방지
+        if (optionalPlan.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Does not exist id = " + id);
+        }
+
+        // 확인
+        System.out.println("Service layer 에서의 id : " + optionalPlan.get().getId());
+
+
+        return new PlanResponseDto(optionalPlan.get());
     }
+
+
 }
