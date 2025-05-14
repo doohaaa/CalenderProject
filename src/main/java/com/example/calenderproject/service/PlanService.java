@@ -14,4 +14,8 @@ public interface PlanService {
     List<PlanResponseDto> findPlans(String modifiedDate, String writer);
 
     PlanResponseDto findPlanById(Long id);
+
+    PlanResponseDto updateWriterOrContents(Long id, String writer, String contents);
+
+    void deletePlan(Long id, String password);
 }

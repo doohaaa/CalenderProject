@@ -40,9 +40,7 @@ public class PlanController {
         return planService.findPlans(modifiedDate, writer);
     }
 
-
-
-    // 메모 단건 조회
+    // 일정 단건 조회
     @GetMapping("/{id}")
     public ResponseEntity<PlanResponseDto> findPlanById(@PathVariable Long id) {
         return new ResponseEntity<>(planService.findPlanById(id), HttpStatus.OK);
@@ -50,6 +48,20 @@ public class PlanController {
 
 
 
+    // 일정 할일, 작성자 수정
+    @PatchMapping("{/id}")
+    public ResponseEntity<PlanResponseDto> updateWriterOrContents(
+            @PathVariable Long id,
+            @RequestBody PlanRequestDto requestDto
+    ){
+        return new ResponseEntity<>(planService.updateWriterOrContents(id, requestDto.getWriter(), requestDto.getContents() ), HttpStatus.OK);
+    }
 
-
+    // 일정 삭제
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletePlan(@PathVariable Long id){
+        planService.deletePlan(id);
+        // 성공한 경우
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

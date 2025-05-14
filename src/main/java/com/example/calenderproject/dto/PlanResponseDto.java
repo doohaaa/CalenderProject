@@ -25,7 +25,7 @@ public class PlanResponseDto {
         this.id = plan.getId();
         this.writer = plan.getWriter();
         this.contents = plan.getContents();
-        this.password = plan.getPassword();
+        this.password = null;
         this.createdDate = plan.getCreatedDate();
         this.modifiedDate = plan.getModifiedDate();
     }

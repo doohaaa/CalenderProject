@@ -41,5 +41,9 @@ public class Plan {
         this.modifiedDate = modifiedDate;
     }
 
+    public void deletePlan(String password){
+
+    }
+
 
 }

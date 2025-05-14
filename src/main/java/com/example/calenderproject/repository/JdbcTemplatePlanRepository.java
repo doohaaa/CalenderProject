@@ -107,6 +107,37 @@ public class JdbcTemplatePlanRepository implements PlanRepository{
         };
     }
 
+    @Override
+    public PlanResponseDto updateWriterOrContents(Long id, String modifiedWriter, String modifiedContents) {
+        String sql = "select * from plan where 1=1";
+        List<Object> params = new ArrayList<>();
+
+        if(modifiedDate !=null && !modifiedDate.isEmpty()){
+            sql += " and DATE(modifiedDate) = ?";
+            params.add(LocalDate.parse(modifiedDate));
+        }
+        if(writer != null && !writer.isEmpty()){
+            sql += " and writer = ?";
+            params.add(writer);
+        }
+
+        sql += " order by modifiedDate desc";
+
+        return jdbcTemplate.query(sql, planRowMapper(), params.toArray());
+
+
+
+
+        return null;
+    }
+
+    @Override
+    public int deletePlan(Long id, String password) {
+        if(password == )
+
+        return 0;
+    }
+
 
 //    @Override
 //    public Plan findPlanByIdOrElseThrow(Long id) {

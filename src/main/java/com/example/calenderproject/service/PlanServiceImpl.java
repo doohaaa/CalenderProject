@@ -6,6 +6,7 @@ import com.example.calenderproject.entity.Plan;
 import com.example.calenderproject.repository.PlanRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
@@ -60,6 +61,24 @@ public class PlanServiceImpl implements PlanService {
 
 
         return new PlanResponseDto(optionalPlan.get());
+    }
+
+    @Transactional
+    @Override
+    public PlanResponseDto updateWriterOrContents(Long id, String writer, String contents) {
+
+        PlanResponseDto updatedPlan = planRepository.updateWriterOrContents(id, writer, contents);
+
+        return updatedPlan;
+    }
+
+    @Override
+    public void deletePlan(Long id, String password) {
+
+        int deletedRow = planRepository.deletePlan(id);
+        if(deletedRow == 0){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Does not exist id = "+id);
+        }
     }
 
 
