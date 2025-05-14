@@ -41,5 +41,7 @@ https://documenter.getpostman.com/view/44720808/2sB2qUmQ66
 
 
 ### ⭐️ 요구사항 분석
+<img width="607" alt="image" src="https://github.com/user-attachments/assets/5cf1cf01-34ec-4757-b71c-4d703f8cbf38" />
+<img width="792" alt="image" src="https://github.com/user-attachments/assets/8810375d-6bef-4434-951b-81f2b7a2783e" />
 
 
