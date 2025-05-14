@@ -25,11 +25,12 @@ public class PlanController {
         return new ResponseEntity<>(planService.savePlan(dto), HttpStatus.CREATED);
     }
 
-    // 전체 조회
-    //@GetMapping
-    //public List<PlanResponseDto> findAllPlans() {
-    //    return planService.findAllPlans();
-    //}
+    /* 전체 조회
+    @GetMapping
+    public List<PlanResponseDto> findAllPlans() {
+        return planService.findAllPlans();
+    }
+    */
 
     // 필터 있는 전체 조회
     @GetMapping
@@ -47,7 +48,7 @@ public class PlanController {
     }
 
 
-
+    /* lv2 미완성
     // 일정 할일, 작성자 수정
     @PatchMapping("{/id}")
     public ResponseEntity<PlanResponseDto> updateWriterOrContents(
@@ -64,4 +65,5 @@ public class PlanController {
         // 성공한 경우
         return new ResponseEntity<>(HttpStatus.OK);
     }
+    */
 }

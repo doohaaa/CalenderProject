@@ -12,15 +12,17 @@ public interface PlanRepository {
 
     PlanResponseDto savePlan(Plan plan);
 
+    /*
     List<PlanResponseDto> findAllPlans();
-
+    */
     List<PlanResponseDto> findPlans(String modifiedDate, String writer);
 
     Optional<Plan> findPlanById(Long id);
 
+    /* lv2 미완성
     // Plan findPlanByIdOrElseThrow(Long id);
     PlanResponseDto updateWriterOrContents(Long id, String modifiedWriter, String modifiedContents);
 
     int deletePlan(Long id, String password);
-
+    */
 }

@@ -32,12 +32,14 @@ public class PlanServiceImpl implements PlanService {
         return planRepository.savePlan(plan);
     }
 
+    /*
     @Override
     public List<PlanResponseDto> findAllPlans() {
         List<PlanResponseDto> plans = planRepository.findAllPlans();
         return plans;
 
     }
+    */
 
     @Override
     public List<PlanResponseDto> findPlans(String modifiedDate, String writer) {
@@ -63,6 +65,7 @@ public class PlanServiceImpl implements PlanService {
         return new PlanResponseDto(optionalPlan.get());
     }
 
+    /* lv2 미완성
     @Transactional
     @Override
     public PlanResponseDto updateWriterOrContents(Long id, String writer, String contents) {
@@ -80,6 +83,7 @@ public class PlanServiceImpl implements PlanService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Does not exist id = "+id);
         }
     }
+     */
 
 
 }

@@ -47,11 +47,12 @@ public class JdbcTemplatePlanRepository implements PlanRepository{
 
     }
 
+    /*
     @Override
     public List<PlanResponseDto> findAllPlans() {
         return jdbcTemplate.query("select * from plan", planRowMapper());
     }
-
+    */
 
     @Override
     public List<PlanResponseDto> findPlans(String modifiedDate, String writer) {
@@ -107,6 +108,8 @@ public class JdbcTemplatePlanRepository implements PlanRepository{
         };
     }
 
+    /* lv2 미완성
+
     @Override
     public PlanResponseDto updateWriterOrContents(Long id, String modifiedWriter, String modifiedContents) {
         String sql = "select * from plan where 1=1";
@@ -126,8 +129,6 @@ public class JdbcTemplatePlanRepository implements PlanRepository{
         return jdbcTemplate.query(sql, planRowMapper(), params.toArray());
 
 
-
-
         return null;
     }
 
@@ -137,16 +138,6 @@ public class JdbcTemplatePlanRepository implements PlanRepository{
 
         return 0;
     }
-
-
-//    @Override
-//    public Plan findPlanByIdOrElseThrow(Long id) {
-//        List<Plan> result = jdbcTemplate.query("select * from plan where id =?", planRowMapperV2(), id);
-//
-//        return result.stream().findAny().orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Does not exsit id = "+id));
-//    }
-
-
-
+    */
 
 }
