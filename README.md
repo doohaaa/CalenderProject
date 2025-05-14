@@ -33,5 +33,6 @@
 
 
 **ERD**
+<img width="391" alt="image" src="https://github.com/user-attachments/assets/148d3b85-063f-458d-b4fe-bee4242bd4e6" />
 
 
