@@ -22,13 +22,14 @@
 
 
 
-### 책임 분리
+### ⭐️ 책임 분리
 - Controller : 요청, 응답
 - Service : 비즈니스 로직
 - Repository : 데이터베이스와 상호작용
 - DTO : Layer 간 데이터 전달
 
 
+### ⭐️ API 명세 및 ERD
 
 **API 명세서**
 https://documenter.getpostman.com/view/44720808/2sB2qUmQ66
@@ -37,5 +38,8 @@ https://documenter.getpostman.com/view/44720808/2sB2qUmQ66
 **ERD**
 
 <img width="391" alt="image" src="https://github.com/user-attachments/assets/148d3b85-063f-458d-b4fe-bee4242bd4e6" />
+
+
+### ⭐️ 요구사항 분석
 
 
